@@ -3,5 +3,7 @@
     <Project Path="src/PatientManagement.App.Shared/PatientManagement.App.Shared.csproj" />
     <Project Path="src/PatientManagement.App.Web/PatientManagement.App.Web.csproj" />
     <Project Path="src/PatientManagement.App/PatientManagement.App.csproj" />
+    <Project Path="src/PatientManagement.App.Domain/PatientManagement.App.Domain.csproj" />
+    <Project Path="src/PatientManagement.App.Client/PatientManagement.App.Client.csproj" />
   </Folder>
 </Solution>

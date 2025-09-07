@@ -69,6 +69,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PatientManagement.App.Shared\PatientManagement.App.Shared.csproj" />
+    <ProjectReference Include="..\PatientManagement.App.Client\PatientManagement.App.Client.csproj" />
   </ItemGroup>
 
 </Project>

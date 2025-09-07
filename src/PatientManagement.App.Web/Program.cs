@@ -2,6 +2,9 @@ using PatientManagement.App.Web.Components;
 using PatientManagement.App.Shared.Services;
 using PatientManagement.App.Web.Services;
 using MudBlazor.Services;
+using PatientManagement.App.Client.Extensions;
+using PatientManagement.App.Domain.Interfaces;
+using PatientManagement.App.Client.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,7 @@ builder.Services.AddRazorComponents()
 
 // Add device-specific services used by the PatientManagement.App.Shared project
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
+builder.Services.AddApiClients(new Uri("http://localhost:8080"));
 
 builder.Services.AddMudServices();
 
