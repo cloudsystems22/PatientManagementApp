@@ -12,11 +12,19 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<ISpecialityApiClient, SpecialityApiClient>();
         services.AddScoped<IPatientApiClient, PatientApiClient>();
+        services.AddScoped<ICareApiClient, CareApiClient>();
+        services.AddScoped<ITriageApiClient, TriageApiClient>();
 
         services.AddHttpClient<ISpecialityApiClient, SpecialityApiClient>(client =>
             client.BaseAddress = new Uri(baseAddress));
 
         services.AddHttpClient<IPatientApiClient, PatientApiClient>(Client =>
+            Client.BaseAddress = new Uri(baseAddress));
+
+        services.AddHttpClient<ICareApiClient, CareApiClient>(Client =>
+            Client.BaseAddress = new Uri(baseAddress));
+
+        services.AddHttpClient<ITriageApiClient, TriageApiClient>(Client =>
             Client.BaseAddress = new Uri(baseAddress));
 
 
