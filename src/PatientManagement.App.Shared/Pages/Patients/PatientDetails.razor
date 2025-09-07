@@ -1,0 +1,38 @@
+@using PatientManagement.App.Domain.Dtos
+@using PatientManagement.App.Domain.Enums
+
+<MudForm @ref="form" @bind-IsValid="@success">
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h5">@(IsEdit ? $"Editar {Model.Name}" : "Novo Paciente")</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Nome" @bind-Value="Model.Name" For="@(() => Model.Name)" Required="true" RequiredError="O nome é obrigatório." />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="RG" @bind-Value="Model.Rg" For="@(() => Model.Rg)" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Telefone" @bind-Value="Model.Phone" For="@(() => Model.Phone)" Required="true" RequiredError="O telefone é obrigatório." />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudSelect T="Gender" Label="Sexo" @bind-Value="Model.Sex" For="@(() => Model.Sex)">
+                        @foreach (Gender item in Enum.GetValues(typeof(Gender)))
+                        {
+                            <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Email" @bind-Value="Model.EmailAddress" For="@(() => Model.EmailAddress)" InputType="InputType.Email" Required="true" RequiredError="O email é obrigatório." />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancelar</MudButton>
+            <MudButton Color="Color.Primary" Disabled="@(!success)" OnClick="Submit">Salvar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudForm>

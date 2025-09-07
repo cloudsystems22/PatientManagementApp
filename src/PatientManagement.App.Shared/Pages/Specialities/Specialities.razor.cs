@@ -87,11 +87,11 @@ public partial class Specialities
         if (!result.Canceled)
         {
             _editSpeciality = (SpecialityDto)result.Data;
-            await SaveProductAsync();
+            await SaveSpecialityAsync();
         }
     }
 
-    private async Task SaveProductAsync()
+    private async Task SaveSpecialityAsync()
     {
         if (_isEdit)
         {
@@ -105,7 +105,7 @@ public partial class Specialities
         var resultSp = await SpecialityApiClient.SearchAsync(_searchString);
         specialities = resultSp.Data!.ToList();
     }
-    private async Task DeleteProduct(SpecialityDto speciality)
+    private async Task DeleteSpeciality(SpecialityDto speciality)
     {
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
         var parameters = new DialogParameters<DialogDefault>
@@ -118,7 +118,6 @@ public partial class Specialities
         var result = await dialog.Result;
         if (!result.Canceled)
         {
-            //specialities.Remove(speciality);
             await SpecialityApiClient.DeleteAsync(speciality.Id);
             var resultSp = await SpecialityApiClient.SearchAsync(_searchString);
             specialities = resultSp.Data!.ToList();

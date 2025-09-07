@@ -1,0 +1,46 @@
+@using PatientManagement.App.Domain.Dtos
+
+@page "/patients"
+
+<MudText Typo="Typo.h4" GutterBottom="true">Pacientes</MudText>
+
+<MudTable Items="@patients" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<PatientDto,bool>(FilterFunc1)" @bind-SelectedItem="selectedPatient">
+    <ToolBarContent>
+        <MudGrid GutterSize="3" Class="align-center">
+            <MudItem xs="7" md="9">
+                <MudTextField @bind-Value="_searchString"
+                              Placeholder="Pesquisar"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Class="w-100" />
+            </MudItem>
+            <MudItem xs="5" md="3" Class="d-flex justify-end align-center">
+                <MudButton Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           OnClick="@OpenDialogAsync"
+                           Variant="Variant.Outlined"
+                           Class="mt-md-0 mt-2 w-100 w-md-auto">
+                    Adicionar
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Nome</MudTh>
+        <MudTh>Telefone</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nome">@context.Name</MudTd>
+        <MudTd DataLabel="Telefone">@context.Phone</MudTd>
+        <MudTd DataLabel="Email">@context.EmailAddress</MudTd>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => OpenEditDialogAsync(context))" />
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeletePatientAsync(context))" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
