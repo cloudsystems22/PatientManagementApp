@@ -1,6 +1,7 @@
 using PatientManagement.App.Web.Components;
 using PatientManagement.App.Shared.Services;
 using PatientManagement.App.Web.Services;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddRazorComponents()
 
 // Add device-specific services used by the PatientManagement.App.Shared project
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
+
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 

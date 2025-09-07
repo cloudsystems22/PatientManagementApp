@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PatientManagement.App.Shared.Services;
 using PatientManagement.App.Services;
+using MudBlazor.Services;
 
 namespace PatientManagement.App;
 
@@ -17,6 +18,7 @@ public static class MauiProgram
             });
 
         // Add device-specific services used by the PatientManagement.App.Shared project
+        builder.Services.AddMudServices();
         builder.Services.AddSingleton<IFormFactor, FormFactor>();
 
         builder.Services.AddMauiBlazorWebView();

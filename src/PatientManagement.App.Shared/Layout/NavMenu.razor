@@ -1,30 +1,14 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">PatientManagement.App</a>
-    </div>
-</div>
-
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
+﻿<MudNavMenu>
+    <MudNavLink Icon="@Icons.Material.Filled.Dashboard" Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+    @* <MudNavLink Href="weather" Match="NavLinkMatch.Prefix">Servers</MudNavLink> *@
+    <MudNavLink Icon="@Icons.Material.Filled.QrCode2" Href="stockmovement" Match="NavLinkMatch.Prefix">Pacientes</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.QrCode2" Href="stockmovement" Match="NavLinkMatch.Prefix">Atendimentos</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.QrCode2" Href="stockmovement" Match="NavLinkMatch.Prefix">Triagens</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.QrCode2" Href="stockmovement" Match="NavLinkMatch.Prefix">Especialidades</MudNavLink>
+    @* <MudNavGroup Icon="@Icons.Material.Filled.BackupTable" Title="Tabelas" Expanded="true">
+        <MudNavLink Icon="@Icons.Material.Filled.TableRows" Href="customers" Match="NavLinkMatch.Prefix">Clientes</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.TableRows" Href="suppliers" Match="NavLinkMatch.Prefix">Fornecedores</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.TableRows" Href="products" Match="NavLinkMatch.Prefix">Products</MudNavLink>
+    </MudNavGroup> *@
+    <MudNavLink Icon="@Icons.Material.Filled.Info" Href="counter"  Match="NavLinkMatch.Prefix">About</MudNavLink>
+</MudNavMenu>
