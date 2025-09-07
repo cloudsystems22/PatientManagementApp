@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/PatientManagement.App/">
+    <Project Path="src/PatientManagement.App/PatientManagement.App.Shared/PatientManagement.App.Shared.csproj" />
+    <Project Path="src/PatientManagement.App/PatientManagement.App.Web/PatientManagement.App.Web.csproj" />
+    <Project Path="src/PatientManagement.App/PatientManagement.App/PatientManagement.App.csproj" />
+  </Folder>
+</Solution>
