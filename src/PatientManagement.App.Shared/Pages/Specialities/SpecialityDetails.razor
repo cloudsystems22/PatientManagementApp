@@ -1,0 +1,37 @@
+@inject ISnackbar Snackbar
+@using PatientManagement.App.Domain
+@using PatientManagement.App.Domain.Dtos
+
+<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h5">@(_isEdit ? Model.Name : "Nova Especialidade")</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudTextField Label="Id" @bind-Value="Model.Id" Required="true" RequiredError="Código da especialidade!" />
+            <MudTextField Label="Name" @bind-Value="Model.Name" Required="true" RequiredError="Nome da especialidade!" />
+        </DialogContent>
+        <DialogActions>
+            <MudButton Color="Color.Primary" Disabled="@(!success)" OnClick="Submit">Salvar</MudButton>
+            <MudButton OnClick="Cancel">Cancelar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudForm>
+
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+    [Parameter] public SpecialityDto Model { get; set; }
+    [Parameter] public bool _isEdit { get; set; }
+    bool success;
+    string[] errors = { };
+    MudTextField<string> pwField1;
+    MudForm form;
+    private void Submit()
+    {
+        string sucessoMsg = _isEdit ? "Editado com sucesso!" : "Adicionado com sucesso!";
+        Snackbar.Add($"{Model.Id}-{Model.Name} {sucessoMsg}", Severity.Success);
+        MudDialog.Close(DialogResult.Ok(Model));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,22 @@
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5">@Title</MudText>
+    </TitleContent>
+    <DialogContent>
+        @Message
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter]
+    private IMudDialogInstance MudDialog { get; set; }
+    [Parameter] public string Title { get; set; } = "Default Dialog";
+    [Parameter] public string Message { get; set; } = "This is a default dialog message.";
+
+    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+
+    private void Cancel() => MudDialog.Cancel();
+}

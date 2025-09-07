@@ -14,7 +14,7 @@ builder.Services.AddRazorComponents()
 
 // Add device-specific services used by the PatientManagement.App.Shared project
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
-builder.Services.AddApiClients(new Uri("http://localhost:8080"));
+builder.Services.AddApiClients();
 
 builder.Services.AddMudServices();
 

@@ -7,12 +7,13 @@ namespace PatientManagement.App.Client.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApiClients(this IServiceCollection services, Uri baseAddress)
+    private static string baseAddress = "http://localhost:8080";
+    public static IServiceCollection AddApiClients(this IServiceCollection services)
     {
-        services.AddHttpClient<ISpecialityApiClient, SpecialityApiClient>(client =>
-            client.BaseAddress = baseAddress);
-
         services.AddScoped<ISpecialityApiClient, SpecialityApiClient>();
+        services.AddHttpClient<ISpecialityApiClient, SpecialityApiClient>(client =>
+            client.BaseAddress = new Uri(baseAddress));
+
 
         return services;
     }
