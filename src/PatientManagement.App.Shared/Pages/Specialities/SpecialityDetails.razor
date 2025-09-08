@@ -8,7 +8,6 @@
             <MudText Typo="Typo.h5">@(_isEdit ? Model.Name : "Nova Especialidade")</MudText>
         </TitleContent>
         <DialogContent>
-            <MudTextField Label="Id" @bind-Value="Model.Id" Required="true" RequiredError="Código da especialidade!" />
             <MudTextField Label="Name" @bind-Value="Model.Name" Required="true" RequiredError="Nome da especialidade!" />
         </DialogContent>
         <DialogActions>

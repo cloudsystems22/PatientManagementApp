@@ -77,6 +77,7 @@ public partial class Patients
             if (createResult.Success)
             {
                 await LoadPatientsAsync();
+                StateHasChanged();
             }
         }
     }
@@ -100,6 +101,7 @@ public partial class Patients
             var updatedPatient = (PatientDto)result.Data;
             await PatientApiClient.UpdateAsync(updatedPatient);
             await LoadPatientsAsync();
+            StateHasChanged();
         }
     }
 
@@ -118,6 +120,7 @@ public partial class Patients
         {
             await PatientApiClient.DeleteAsync(patient.Id);
             await LoadPatientsAsync();
+            StateHasChanged();
         }
     }
 }

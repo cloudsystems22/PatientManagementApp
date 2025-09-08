@@ -22,12 +22,26 @@ public class TriageDto
     [JsonPropertyName("height")]
     public decimal Height { get; set; }
 
-    [JsonPropertyName("specialtyId")]
-    public string SpecialtyId { get; set; }
+    [JsonPropertyName("specialityId")]
+    public string SpecialityId { get; set; }
 
-    [JsonPropertyName("imc")]
-    public decimal IMC { get; set; }
+    [JsonIgnore]
+    public decimal IMC => (Height > 0 && Weight > 0) ? Weight / (Height * Height) : 0;
 
-    [JsonPropertyName("imcClassification")]
-    public string IMCClassification { get; set; } = string.Empty;
+    [JsonIgnore]
+    public string IMCClassification
+    {
+        get
+        {
+            var imc = this.IMC;
+            if (imc == 0) return "Não calculado";
+            if (imc < 18.5m) return "Abaixo do peso";
+            if (imc < 25.0m) return "Peso normal";
+            if (imc < 30.0m) return "Sobrepeso";
+            if (imc < 35.0m) return "Obesidade Grau I";
+            if (imc < 40.0m) return "Obesidade Grau II";
+            if (imc >= 40.0m) return "Obesidade Grau III";
+            return "Não calculado";
+        }
+    }
 }

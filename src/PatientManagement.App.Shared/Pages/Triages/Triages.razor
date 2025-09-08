@@ -1,0 +1,46 @@
+@using PatientManagement.App.Domain.Dtos
+
+@page "/triages"
+
+<MudText Typo="Typo.h4" GutterBottom="true">Triagens</MudText>
+
+<MudTable Items="@triages" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<TriageDto,bool>(FilterFunc1)" @bind-SelectedItem="selectedTriage">
+    <ToolBarContent>
+        <MudGrid GutterSize="3" Class="align-center">
+            <MudItem xs="7" md="9">
+                <MudTextField @bind-Value="_searchString"
+                              Placeholder="Pesquisar por ID do Atendimento"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Class="w-100" />
+            </MudItem>
+            <MudItem xs="5" md="3" Class="d-flex justify-end align-center">
+                <MudButton Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           OnClick="@OpenDialogAsync"
+                           Variant="Variant.Outlined"
+                           Class="mt-md-0 mt-2 w-100 w-md-auto">
+                    Adicionar
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>ID Atendimento</MudTh>
+        <MudTh>Sintomas</MudTh>
+        <MudTh>Classificação IMC</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="ID Atendimento">@context.CareId</MudTd>
+        <MudTd DataLabel="Sintomas">@context.Symptoms</MudTd>
+        <MudTd DataLabel="Classificação IMC">@context.IMCClassification</MudTd>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => OpenEditDialogAsync(context))" />
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteTriageAsync(context))" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

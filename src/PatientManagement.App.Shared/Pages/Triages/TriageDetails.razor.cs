@@ -1,0 +1,44 @@
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using PatientManagement.App.Domain.Dtos;
+using PatientManagement.App.Domain.Interfaces;
+
+namespace PatientManagement.App.Shared.Pages.Triages;
+
+public partial class TriageDetails
+{
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = default!;
+    [Inject] ISpecialityApiClient SpecialityApiClient { get; set; } = default!;
+    [Inject] ISnackbar Snackbar { get; set; } = default!;
+
+    [Parameter] public TriageDto Model { get; set; } = new();
+    [Parameter] public bool IsEdit { get; set; }
+
+    private IEnumerable<SpecialityDto> _specialities = new List<SpecialityDto>();
+
+    private bool success;
+    private MudForm? form;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await SpecialityApiClient.SearchAsync();
+        if (string.IsNullOrEmpty(result.Error))
+        {
+            _specialities = result.Data ?? new List<SpecialityDto>();
+        }
+    }
+
+    private void Submit()
+    {
+        string successMsg = IsEdit ? "editada com sucesso!" : "adicionada com sucesso!";
+        Snackbar.Add($"Triagem {successMsg}", Severity.Success);
+        MudDialog.Close(DialogResult.Ok(Model));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void OnImcDataChanged()
+    {
+        StateHasChanged();
+    }
+}

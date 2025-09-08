@@ -1,0 +1,51 @@
+@using PatientManagement.App.Domain.Dtos
+
+<MudForm @ref="form" @bind-IsValid="@success">
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">@(IsEdit ? Model.CareId : "Nova Triagem")</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField Label="ID do Atendimento" @bind-Value="Model.CareId" For="@(() => Model.CareId)" Required="true" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Sintomas" @bind-Value="Model.Symptoms" For="@(() => Model.Symptoms)" Required="true" Lines="3" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Pressão Arterial" @bind-Value="Model.BloodPressure" For="@(() => Model.BloodPressure)" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudNumericField Label="Peso (kg)" @bind-Value:after="OnImcDataChanged" @bind-Value="Model.Weight" For="@(() => Model.Weight)" Required="true" Min="0" Step="0.1m" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudNumericField Label="Altura (m)" @bind-Value:after="OnImcDataChanged" @bind-Value="Model.Height" For="@(() => Model.Height)" Required="true" Min="0" Step="0.01m" />
+                </MudItem>
+                <MudItem xs="12">
+                    @if (Model.IMC > 0)
+                    {
+                        <MudText Typo="Typo.body1" Class="mt-4">
+                            <strong>IMC:</strong> @Model.IMC.ToString("F2")
+                        </MudText>
+                        <MudText Typo="Typo.body1">
+                            <strong>Classificação:</strong> @Model.IMCClassification
+                        </MudText>
+                    }
+                </MudItem>
+                <MudItem xs="12">
+                    <MudSelect T="string" Label="Especialidade" @bind-Value="Model.SpecialityId" For="@(() => Model.SpecialityId)" Required="true">
+                        @foreach (var speciality in _specialities)
+                        {
+                            <MudSelectItem Value="@speciality.Id">@speciality.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancelar</MudButton>
+            <MudButton Color="Color.Primary" OnClick="Submit" Disabled="@(!success)">Salvar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudForm>
