@@ -1,14 +1,60 @@
 ﻿@page "/"
-@using PatientManagement.App.Shared.Services
-@inject IFormFactor FormFactor
+@inject NavigationManager NavigationManager
+
+<style>
+    .clickable-card {
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .clickable-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+</style>
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app running on <em>@factor</em> using <em>@platform</em>.
-
-@code {
-    private string factor => FormFactor.GetFormFactor();
-    private string platform => FormFactor.GetPlatform();
-}
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-10">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Bem-vindo ao Sistema de Gestão de Pacientes</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" Color="Color.Secondary" Class="mb-10">Selecione uma das opções abaixo para começar.</MudText>
+    
+    <MudGrid Justify="Justify.Center" Spacing="4">
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Class="clickable-card" @onclick='() => NavigationManager.NavigateTo("/patients")'>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Pacientes</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText>Gerencie o cadastro e as informações dos seus pacientes.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Class="clickable-card" @onclick='() => NavigationManager.NavigateTo("/triages")'>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Triagens</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText>Acesse e registre novas triagens para os pacientes.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Class="clickable-card" @onclick='() => NavigationManager.NavigateTo("/cares")'>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Atendimentos</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText>Visualize o histórico de atendimentos realizados.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
