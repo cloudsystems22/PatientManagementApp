@@ -28,12 +28,14 @@
     <HeaderContent>
         <MudTh>ID Atendimento</MudTh>
         <MudTh>Sintomas</MudTh>
+        <MudTh>P/A</MudTh>
         <MudTh>Classificação IMC</MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="ID Atendimento">@context.CareId</MudTd>
         <MudTd DataLabel="Sintomas">@context.Symptoms</MudTd>
+        <MudTd DataLabel="Sintomas">@context.BloodPressure</MudTd>
         <MudTd DataLabel="Classificação IMC">@context.IMCClassification</MudTd>
         <MudTd>
             <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => OpenEditDialogAsync(context))" />
