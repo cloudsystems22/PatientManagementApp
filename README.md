@@ -20,7 +20,7 @@ O **PatientManagementApp** é um sistema para gerenciamento de pacientes, desenv
 
 A aplicação utiliza o padrão .NET MAUI Blazor Hybrid. A interface do usuário é construída com componentes Blazor que são renderizados em uma `BlazorWebView` dentro da aplicação nativa. Os serviços (como `PacienteService.cs`) são responsáveis por se comunicar com uma API backend (não inclusa neste repositório) para buscar e enviar dados.
 
-![Arquitetura](diagram.png)
+![Arquitetura](diagramfrontend.png)
 
 ## 📂 Estrutura do Projeto
 
