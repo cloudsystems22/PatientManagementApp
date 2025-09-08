@@ -94,9 +94,9 @@ public partial class Cares
             if (createResult.Success)
             {
                 await LoadCaresAsync();
-                StateHasChanged();
             }
         }
+        StateHasChanged();
     }
 
     private async Task OpenEditDialogAsync(CareDto care)
@@ -118,8 +118,8 @@ public partial class Cares
             var updatedCare = (CareDto)result.Data;
             await CareApiClient.UpdateAsync(updatedCare);
             await LoadCaresAsync();
-            StateHasChanged();
         }
+        StateHasChanged();
     }
 
     private async Task DeleteCareAsync(CareDto care)
@@ -137,7 +137,7 @@ public partial class Cares
         {
             await CareApiClient.DeleteAsync(care.Id);
             await LoadCaresAsync();
-            StateHasChanged();
         }
+        StateHasChanged();
     }
 }

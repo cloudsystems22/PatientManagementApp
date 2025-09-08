@@ -25,10 +25,10 @@ public class TriageDto
     [JsonPropertyName("specialityId")]
     public string SpecialityId { get; set; }
 
-    [JsonIgnore]
+    [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
     public decimal IMC => (Height > 0 && Weight > 0) ? Weight / (Height * Height) : 0;
 
-    [JsonIgnore]
+    [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
     public string IMCClassification
     {
         get

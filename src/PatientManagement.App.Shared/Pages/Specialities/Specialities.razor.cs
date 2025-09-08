@@ -25,7 +25,6 @@ public partial class Specialities
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(500);
         var result = await SpecialityApiClient.SearchAsync(_searchString);
         specialities = result.Data!.ToList();
     }

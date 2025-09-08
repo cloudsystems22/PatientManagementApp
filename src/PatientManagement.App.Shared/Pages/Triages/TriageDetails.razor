@@ -8,7 +8,12 @@
         <DialogContent>
             <MudGrid>
                 <MudItem xs="12">
-                    <MudTextField Label="ID do Atendimento" @bind-Value="Model.CareId" For="@(() => Model.CareId)" Required="true" />
+                    <MudSelect T="string" Label="Atendimento" @bind-Value="Model.CareId" For="@(() => Model.CareId)" Required="true" Disabled="IsEdit">
+                        @foreach (var care in _cares)
+                        {
+                            <MudSelectItem Value="@care.Id">@($"{care.SequenceNumber} - {GetPatientName(care.PatientId)}")</MudSelectItem>
+                        }
+                    </MudSelect>
                 </MudItem>
                 <MudItem xs="12">
                     <MudTextField Label="Sintomas" @bind-Value="Model.Symptoms" For="@(() => Model.Symptoms)" Required="true" Lines="3" />

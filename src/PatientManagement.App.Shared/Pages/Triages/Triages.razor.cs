@@ -70,13 +70,14 @@ public partial class Triages
         if (!result.Canceled)
         {
             var newTriage = (TriageDto)result.Data;
-            newTriage.Id = Guid.NewGuid().ToString().Substring(0, 8);
+            newTriage.Id = Guid.NewGuid().ToString().Substring(0, 6);
             var createResult = await TriageApiClient.CreateAsync(newTriage);
             if (createResult.Success)
             {
                 await LoadTriagesAsync();
             }
         }
+        StateHasChanged();
     }
 
     private async Task OpenEditDialogAsync(TriageDto triage)
@@ -99,6 +100,7 @@ public partial class Triages
             await TriageApiClient.UpdateAsync(updatedTriage);
             await LoadTriagesAsync();
         }
+        StateHasChanged();
     }
 
     private async Task DeleteTriageAsync(TriageDto triage)
@@ -117,5 +119,6 @@ public partial class Triages
             await TriageApiClient.DeleteAsync(triage.Id);
             await LoadTriagesAsync();
         }
+        StateHasChanged();
     }
 }

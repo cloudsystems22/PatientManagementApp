@@ -77,9 +77,9 @@ public partial class Patients
             if (createResult.Success)
             {
                 await LoadPatientsAsync();
-                StateHasChanged();
             }
         }
+        StateHasChanged();
     }
 
     private async Task OpenEditDialogAsync(PatientDto patient)
@@ -101,8 +101,8 @@ public partial class Patients
             var updatedPatient = (PatientDto)result.Data;
             await PatientApiClient.UpdateAsync(updatedPatient);
             await LoadPatientsAsync();
-            StateHasChanged();
         }
+        StateHasChanged();
     }
 
     private async Task DeletePatientAsync(PatientDto patient)
@@ -120,7 +120,7 @@ public partial class Patients
         {
             await PatientApiClient.DeleteAsync(patient.Id);
             await LoadPatientsAsync();
-            StateHasChanged();
         }
+        StateHasChanged();
     }
 }

@@ -72,7 +72,19 @@ public class TriageApiClient : ITriageApiClient
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync(BaseUrl, triage, _jsonSerializerOptions, cancellationToken);
+            // Cria um objeto anônimo apenas com as propriedades que o backend espera.
+            // Isso garante que IMC e IMCClassification não sejam enviados.
+            var triageRequest = new
+            {
+                id = triage.Id,
+                careId = triage.CareId,
+                symptoms = triage.Symptoms,
+                bloodPressure = triage.BloodPressure,
+                weight = triage.Weight,
+                height = triage.Height,
+                specialityId = triage.SpecialityId
+            };
+            var response = await _httpClient.PostAsJsonAsync(BaseUrl, triageRequest, _jsonSerializerOptions, cancellationToken);
 
             if (response.IsSuccessStatusCode)
             {
@@ -93,7 +105,18 @@ public class TriageApiClient : ITriageApiClient
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync(BaseUrl, triage, _jsonSerializerOptions, cancellationToken);
+            // Para a atualização, enviamos o Id junto com os outros campos.
+            var triageRequest = new
+            {
+                triage.Id,
+                triage.CareId,
+                triage.Symptoms,
+                triage.BloodPressure,
+                triage.Weight,
+                triage.Height,
+                triage.SpecialityId
+            };
+            var response = await _httpClient.PutAsJsonAsync(BaseUrl, triageRequest, _jsonSerializerOptions, cancellationToken);
 
             if (response.IsSuccessStatusCode)
             {
